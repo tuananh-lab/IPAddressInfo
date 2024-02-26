@@ -292,23 +292,25 @@ char* getAllInterfaceIPAddressInfo() {
         exit(EXIT_FAILURE);
     }
 
-    char *result = malloc(1); // Start with an empty string
+     size_t totalLength = 0;
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
+        char *info = getInterfaceIPAddressInfo(ifa);
+        if (info != NULL) {
+            totalLength += strlen(info);
+            free(info);
+        }
+    }
+     char *result = malloc(totalLength + 1);
+    if (result == NULL) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
     result[0] = '\0';
 
     for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
         char *info = getInterfaceIPAddressInfo(ifa);
         if (info != NULL) {
-            // Allocate enough space for the combined result
-            char *temp = malloc(strlen(result) + strlen(info) + 1);
-            // Copy the existing result to temp
-            strcpy(temp, result);
-            // Concatenate the new info to temp
-            strcat(temp, info);
-            // Free the previous result
-            free(result);
-            // Update result to point to temp
-            result = temp;
-            // Free the info string as it's already part of the result
+            strcat(result, info);
             free(info);
         }
     }
