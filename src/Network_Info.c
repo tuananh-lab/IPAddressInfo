@@ -283,7 +283,8 @@ char* getInterfaceIPAddressInfo(struct ifaddrs *ifa) {
     return NULL;
 }
 
-// Function to return information about all active network interfaces
+// Function to return inoptimize performance
+formation about all active network interfaces
 char* getAllInterfaceIPAddressInfo() {
     struct ifaddrs *ifaddr, *ifa;
 
