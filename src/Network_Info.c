@@ -283,8 +283,7 @@ char* getInterfaceIPAddressInfo(struct ifaddrs *ifa) {
     return NULL;
 }
 
-// Function to return inoptimize performance
-formation about all active network interfaces
+// Function to return information about all active network interfaces
 char* getAllInterfaceIPAddressInfo() {
     struct ifaddrs *ifaddr, *ifa;
 
@@ -292,7 +291,7 @@ char* getAllInterfaceIPAddressInfo() {
         perror("getifaddrs");
         exit(EXIT_FAILURE);
     }
-
+// Calculate the size to allocate to the resulting string
      size_t totalLength = 0;
     for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
         char *info = getInterfaceIPAddressInfo(ifa);
@@ -301,13 +300,14 @@ char* getAllInterfaceIPAddressInfo() {
             free(info);
         }
     }
+// Allocate memory for the result string
      char *result = malloc(totalLength + 1);
     if (result == NULL) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
     result[0] = '\0';
-
+// Append information from each network interface to the result string
     for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) {
         char *info = getInterfaceIPAddressInfo(ifa);
         if (info != NULL) {
