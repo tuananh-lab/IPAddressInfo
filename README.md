@@ -1,5 +1,3 @@
-#Network Scanner
-
 ##Using API get information network interface such as: IP Address, SubnetMask, MAC Address, IP Range,....
 
 To run the program, perform the following steps:
