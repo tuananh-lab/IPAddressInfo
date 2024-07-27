@@ -1,6 +1,6 @@
-##Using API get information network interface such as: IP Address, SubnetMask, MAC Address, IP Range,....
+# Using API get information network interface such as: IP Address, SubnetMask, MAC Address, IP Range,....
 
-To run the program, perform the following steps:
+## To run the program, perform the following steps:
 1.Compile the program: 
 ```
  make
